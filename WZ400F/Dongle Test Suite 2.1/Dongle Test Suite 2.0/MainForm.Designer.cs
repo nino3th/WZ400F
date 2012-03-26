@@ -1,4 +1,8 @@
-﻿namespace Dongle_Test_Suite_2._1
+﻿//History
+//==========================================================================================================
+// 20120307 |  2.1.1   | Nino Liu   |  Cancel comment out of thisUSB.ChipReset() and remove gui top's vn.
+//==========================================================================================================
+namespace Dongle_Test_Suite_2._1
 {
     partial class MainForm
     {
@@ -107,7 +111,7 @@
             this.Controls.Add(this.RunButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "ThinkEco USB Test 2.1";
+            this.Text = "ThinkEco USB Test";
             this.ResumeLayout(false);
             this.PerformLayout();
 

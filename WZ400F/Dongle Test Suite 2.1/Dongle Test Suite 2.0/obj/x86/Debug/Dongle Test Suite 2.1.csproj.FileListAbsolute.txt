@@ -22,3 +22,13 @@ D:\Project\ThinkEco\WZ400 SC\Dongle Test Suite 2.1\Dongle Test Suite 2.0\obj\x86
 D:\Project\ThinkEco\WZ400 SC\Dongle Test Suite 2.1\Dongle Test Suite 2.0\obj\x86\Debug\Dongle_Test_Suite_2._1.Properties.Resources.resources
 D:\Project\ThinkEco\WZ400 SC\Dongle Test Suite 2.1\Dongle Test Suite 2.0\obj\x86\Debug\GenerateResource.read.1.tlog
 D:\Project\ThinkEco\WZ400 SC\Dongle Test Suite 2.1\Dongle Test Suite 2.0\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Project\ThinkEco\WZ400F\Dongle Test Suite 2.1\Dongle Test Suite 2.0\bin\Debug\Dongle Test Suite 2.1.1.exe.config
+D:\Project\ThinkEco\WZ400F\Dongle Test Suite 2.1\Dongle Test Suite 2.0\bin\Debug\Dongle Test Suite 2.1.1.exe
+D:\Project\ThinkEco\WZ400F\Dongle Test Suite 2.1\Dongle Test Suite 2.0\bin\Debug\Dongle Test Suite 2.1.1.pdb
+D:\Project\ThinkEco\WZ400F\Dongle Test Suite 2.1\Dongle Test Suite 2.0\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Project\ThinkEco\WZ400F\Dongle Test Suite 2.1\Dongle Test Suite 2.0\obj\x86\Debug\Dongle_Test_Suite_2._1.MainForm.resources
+D:\Project\ThinkEco\WZ400F\Dongle Test Suite 2.1\Dongle Test Suite 2.0\obj\x86\Debug\Dongle_Test_Suite_2._1.Properties.Resources.resources
+D:\Project\ThinkEco\WZ400F\Dongle Test Suite 2.1\Dongle Test Suite 2.0\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Project\ThinkEco\WZ400F\Dongle Test Suite 2.1\Dongle Test Suite 2.0\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Project\ThinkEco\WZ400F\Dongle Test Suite 2.1\Dongle Test Suite 2.0\obj\x86\Debug\Dongle Test Suite 2.1.1.exe
+D:\Project\ThinkEco\WZ400F\Dongle Test Suite 2.1\Dongle Test Suite 2.0\obj\x86\Debug\Dongle Test Suite 2.1.1.pdb

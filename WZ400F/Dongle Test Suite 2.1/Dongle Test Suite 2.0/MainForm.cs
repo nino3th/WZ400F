@@ -1,4 +1,8 @@
-﻿using System;
+﻿//History
+//==========================================================================================================
+// 20120307 |  2.1.1   | Nino Liu   |  Cancel comment out of thisUSB.ChipReset() and remove gui top's vn.
+//==========================================================================================================
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -350,7 +354,7 @@ namespace Dongle_Test_Suite_2._1
         public void LoadFirmware()
         {
             UpdateOutputText("Resetting chip...");
-            //thisUSB.ChipReset();
+            thisUSB.ChipReset();
             UpdateOutputText("Loading secondary stage loader...");
             FirmwareLoader loadFW = new FirmwareLoader(parameters, thisUSB, this);//, parameters.FWimagefilepath);
             loadFW.Run();
