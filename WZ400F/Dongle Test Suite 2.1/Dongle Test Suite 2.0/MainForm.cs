@@ -5,6 +5,8 @@
 // 20120309 |  2.1.2   | Nino Liu   |  Add counter id information by scaning textbox.
 //---------------------------------------------------------------------------------------------------
 // 20120309 |  2.1.3   | Nino Liu   |  Modified MAC header ID become Liteon uniquely and Setting file path.
+//---------------------------------------------------------------------------------------------------
+// 20120323 |  2.1.4   | Nino Liu   |  Modified MAC address rule and writed mac information into FT232R
 //==========================================================================================================
 using System;
 using System.Collections.Generic;
@@ -103,6 +105,9 @@ namespace Dongle_Test_Suite_2._1
                 ReadCounterID();
                 CheckRequirements();                                //check that necessary stuff is plugged in
                 ReadBarcode(); //come back to this                  //read scanned barcode (MAC address) from text box
+
+                parameters.SetSerialNumber(); 
+
                     UpdateOutputText("Opening USB port...");
                 thisUSB.OpenPort(parameters.USB_under_test_pid, 6000);    //open up the usb port
 
@@ -191,7 +196,7 @@ namespace Dongle_Test_Suite_2._1
             parameters.StartTime = new DateTime(2010, 1, 18);
             parameters.StartTime = DateTime.Now;
             parameters.MachineName = System.Environment.MachineName.Replace(' ', '_');
-            parameters.SetSerialNumber(); 
+            //parameters.SetSerialNumber(); 
         }
         public void CheckRequirements()
         {
@@ -259,6 +264,8 @@ namespace Dongle_Test_Suite_2._1
             }
 
             string Mac = null;
+            string sn = null;
+            string temp_sn = null;
             string CandidateMac = null;
             int x = 1200;
             while (x-- > 0)
@@ -280,7 +287,9 @@ namespace Dongle_Test_Suite_2._1
                 {
                     if (CandidateMac.StartsWith(Parameters.MACheader))
                     {
-                        Mac = CandidateMac.Substring(7,16);
+                        sn = CandidateMac.Substring(7, 8);
+                        Mac = CandidateMac.Substring(16,16);
+                        temp_sn = CandidateMac.Substring(28,4);
                         break;
                     }                    
                     else throw new Exception_Yellow("Error: MAC address entered does not begin with the Liteon MAC header (0x80 0x4F 0x58).  Be careful not to type with the keyboard while using the barcode scanner.");
@@ -294,6 +303,8 @@ namespace Dongle_Test_Suite_2._1
             }
             if (x <= 0) throw new Exception_Yellow("Timed out after waiting 1 minute for barcode to scan.  Try again.");
             parameters.MAC = Mac;
+            parameters.SN = sn;
+            parameters.Temp_mac = temp_sn;
             UpdateOutputText("Barcode accepted.");
             UpdateProgressBar_Overall(5);
         }

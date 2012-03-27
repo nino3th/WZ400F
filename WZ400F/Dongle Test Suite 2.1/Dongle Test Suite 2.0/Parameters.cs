@@ -5,6 +5,8 @@
 // 20120308 |  2.1.2   | Nino Liu   |  Add counter id information by scaning textbox.
 //---------------------------------------------------------------------------------------------------
 // 20120309 |  2.1.3   | Nino Liu   |  Modified MAC header ID become Liteon uniquely and Setting file path.
+//---------------------------------------------------------------------------------------------------
+// 20120323 |  2.1.4   | Nino Liu   |  Modified MAC address rule and writed mac information into FT232R
 //===================================================================================================
 
 using System;
@@ -31,7 +33,8 @@ namespace Dongle_Test_Suite_2._1
         public const string nextSNfilepath = mainfilepath + "\\res\\nextSN.txt";
 
         //public const string MACheader = "804F58";
-        public const string MACheader = "TM1001 9CB70D";
+        //public const string MACheader = "TM1001 9CB70D";
+        public const string MACheader = "TE1001 3";
 
         public const uint HwInfAdr = 0x18000;
 
@@ -44,6 +47,8 @@ namespace Dongle_Test_Suite_2._1
 
         //to be filled
         public string MAC = "_";
+        public string SN = "_"; //add 20120323 by nino
+        public string Temp_mac = "_"; //add 20120323 by nino
         public int radioTestsuccesses;
         public double radiotestsuccesspercent;
         public string radiotestsuccesspercentstring = "_";
@@ -151,6 +156,7 @@ namespace Dongle_Test_Suite_2._1
         public void SetSerialNumber()
         {
             SerialNumber = NextSerialNumber();
+            //SerialNumber = Convert.ToUInt32(SN);            
             SerialNumberbytes[0] = Convert.ToByte((SerialNumber & 0xFF000000) >> 24);  //split 64-bit address into 4 bytes, little-Endian
             SerialNumberbytes[1] = Convert.ToByte((SerialNumber & 0x00FF0000) >> 16);
             SerialNumberbytes[2] = Convert.ToByte((SerialNumber & 0x0000FF00) >> 8);
@@ -159,11 +165,11 @@ namespace Dongle_Test_Suite_2._1
         }
         public uint NextSerialNumber()
         {
-            StreamReader SR;
+/*            StreamReader SR;
             uint nextSN;
             try
             {
-                SR = File.OpenText(Parameters.nextSNfilepath);
+                SR = File.OpenText(Parameters.nextSNfilepath);                
             }
             catch (System.ArgumentOutOfRangeException)
             {
@@ -172,15 +178,19 @@ namespace Dongle_Test_Suite_2._1
             try
             {
                 nextSN = Convert.ToUInt32(SR.ReadLine());
+                //nextSN = Convert.ToUInt32(SN);
             }
             catch (System.ArgumentOutOfRangeException)
             {
                 throw new Exception_Yellow("No valid serial number found in nextSN file; cannot assign a unique USB serial number.  Contact ThinkEco to troubleshoot.");
             }
             SR.Close();
-            if (nextSN > 0xFFFFFF) throw new Exception_Yellow("Serial number in nextSN storage file is too large to continue.  You've made a lot of products!  Contact ThinkEco for assistance.");
+*/            
+            uint nextSN;
+            nextSN = Convert.ToUInt32(SN);
+            if (nextSN > 0xFFFFFFF) throw new Exception_Yellow("Serial number in nextSN storage file is too large to continue.  You've made a lot of products!  Contact ThinkEco for assistance.");
             serialnumberlower3bytes = nextSN;
-            nextSN += serialnumberprefix << 24;
+            nextSN += serialnumberprefix << 28;
             return nextSN;
         }
 
@@ -362,6 +372,7 @@ namespace Dongle_Test_Suite_2._1
                 //TimeStamp.DayOfYear.ToString() + '\t' +
                 TimeStamp.ToString() + '\t' +
                 MAC + '\t' +
+                SN +  '\t' +
                 VID + '\t' +
                 PID + '\t' +
                 FTDISerialNum + '\t' +

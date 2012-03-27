@@ -1,4 +1,8 @@
-﻿using System;
+﻿//History
+//===================================================================================================
+// 20120323 |  2.1.4   | Nino Liu   |  Modified MAC address rule and writed mac information into FT232R
+//===================================================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -260,7 +264,9 @@ namespace Dongle_Test_Suite_2._1
 
             data.Cbus3 = FTDI.FT_CBUS_OPTIONS.FT_CBUS_IOMODE;
             data.Manufacturer = "ThinkEco, Inc.";
-            data.Description = "Tested " + parameters.MAC;
+            //data.Description = "Tested " + parameters.SN + parameters.MAC;
+            data.Description = "Tested " + parameters.SN + " " + parameters.Temp_mac;                        
+            //data.Description = "Tested " + parameters.MAC;                        
             data.MaxPower = 80;                  //80 mAmps
 
             //read serial number from board so when we re-write it it doesn't change
@@ -281,7 +287,8 @@ namespace Dongle_Test_Suite_2._1
 
             data.Cbus3 = FTDI.FT_CBUS_OPTIONS.FT_CBUS_SLEEP;
             data.Manufacturer = "ThinkEco, Inc.";
-            data.Description = "ThinkEco USB Receiver";        
+            data.Description = "ThinkEco" + parameters.SN + " " + parameters.Temp_mac;
+            //data.Description = "ThinkEco" + parameters.MAC;        
             data.ProductID = (ushort)(parameters.finalNewFWPID & 0xFFFF);              
             data.MaxPower = 80;                  //80 mAmps
 
