@@ -1,0 +1,66 @@
+Dongle Test Suite 2.1 Settings file
+
+Format of this file: name of parameter, followed by the value of the parameter on its own line.  
+	If the line is blank or commented out, then the parameter will be set using other means: 
+	either a hard-coded default value or a prompt, or another input as indicated in the item description.
+	DO NOT change the parameter name lines, or this settings file will not function.
+
+
+Testing?
+false
+
+Loading?
+true
+
+Firmware image filename:
+Dongle_HW3_SW2.bin
+
+Frequency Counter Address:
+15
+
+PID expected for USB under test (if unspecified, defaults to 04036001):
+04036001
+
+PID expected for reference radio dongle (if unspecified, defaults to 04036006):
+04036006
+
+PID set on completion (if unspecified, defaults to 04038C80):
+04038C81
+
+Throw an error if a test is attempted on a board with this PID (if unspecified, defaults to dummy value 99):
+04038C81
+
+Number of radio tests in each direction:
+5
+
+ZTC image filename:
+ModletZTCwithTMRflashclearBaud115200.bin
+
+SSL bin filename:
+ssl-921600.bin
+
+Reading FW image filename from this settings file (true/false) (prompts for file selection if false):
+true
+
+Listen loop timeout (number of times to loop through 20-ms listen before timing out, default = 50):
+150
+
+TRIMMING SETTINGS:
+Trimming crystal? (defaults to false, ignored if testing = false) (this line must be first of the trimming settings)
+false
+
+If not trimming crystal (ignored if trimming set to true):
+-Setting default trim values?
+   true
+   Default trim values (use two digits even if below 10, like 08):
+   coarse: 10
+   fine: 13
+-Looking up trim values by MAC address in external log file?
+   false
+   external trim log filename: trimdatabase.txt
+-Measuring frequency once at the chosen trim values?
+   false
+
+
+END SETTINGS FILE
+
