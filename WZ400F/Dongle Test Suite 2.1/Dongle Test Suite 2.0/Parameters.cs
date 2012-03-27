@@ -3,6 +3,8 @@
 // 20120307 |  2.1.1   | Nino Liu   |  Cancel comment out of thisUSB.ChipReset() and remove gui top's vn.
 //---------------------------------------------------------------------------------------------------
 // 20120308 |  2.1.2   | Nino Liu   |  Add counter id information by scaning textbox.
+//---------------------------------------------------------------------------------------------------
+// 20120309 |  2.1.3   | Nino Liu   |  Modified MAC header ID become Liteon uniquely and Setting file path.
 //===================================================================================================
 
 using System;
@@ -17,17 +19,19 @@ namespace Dongle_Test_Suite_2._1
     class Parameters
     {
         //constants
-        public const string mainfilepath = "C:\\Program Files\\ThinkEco Test Suite\\Dongle Test Suite 2.1";
-        public const string settingsfilepath = mainfilepath + "\\Settings.txt";
-        public const string testingfilepath = mainfilepath + "\\testing";
-        public const string loadingfilepath = mainfilepath + "\\loading";
-        public const string modifiedFWimagefilepath = loadingfilepath + "\\ModifiedFWImageForLoading.bin";
-        public const string logfilepath = mainfilepath + "\\log.txt";
-        public const string backuplogfilepath = mainfilepath + "\\backuplog.txt";
-        public const string errorlogfilepath = mainfilepath + "\\errorlog.txt";
-        public const string nextSNfilepath = mainfilepath + "\\nextSN.txt";
+        //public const string mainfilepath = "C:\\Program Files\\ThinkEco Test Suite\\Dongle Test Suite 2.1";
+        public const string mainfilepath = "D:\\Project\\ThinkEco\\WZ400F\\Dongle Test Suite 2.1\\Dongle Test Suite 2.0";
+        public const string settingsfilepath = mainfilepath + "\\res\\Settings.txt";
+        public const string testingfilepath = mainfilepath + "\\res\\testing";
+        public const string loadingfilepath = mainfilepath + "\\res\\loading";
+        public const string modifiedFWimagefilepath = loadingfilepath + "\\res\\ModifiedFWImageForLoading.bin";
+        public const string logfilepath = mainfilepath + "\\res\\log.txt";
+        public const string backuplogfilepath = mainfilepath + "\\res\\backuplog.txt";
+        public const string errorlogfilepath = mainfilepath + "\\res\\errorlog.txt";
+        public const string nextSNfilepath = mainfilepath + "\\res\\nextSN.txt";
 
-        public const string MACheader = "804F58";
+        //public const string MACheader = "804F58";
+        public const string MACheader = "TM1001 9CB70D";
 
         public const uint HwInfAdr = 0x18000;
 

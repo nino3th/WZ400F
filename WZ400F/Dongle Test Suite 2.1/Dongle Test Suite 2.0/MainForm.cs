@@ -3,6 +3,8 @@
 // 20120307 |  2.1.1   | Nino Liu   |  Cancel comment out of thisUSB.ChipReset() and remove gui top's vn.
 //---------------------------------------------------------------------------------------------------
 // 20120309 |  2.1.2   | Nino Liu   |  Add counter id information by scaning textbox.
+//---------------------------------------------------------------------------------------------------
+// 20120309 |  2.1.3   | Nino Liu   |  Modified MAC header ID become Liteon uniquely and Setting file path.
 //==========================================================================================================
 using System;
 using System.Collections.Generic;
@@ -249,7 +251,8 @@ namespace Dongle_Test_Suite_2._1
         {
             //parameters.MAC = "804F580000000000";
 
-            if (ScannerInputBox.Text.Length < 16)
+            //if (ScannerInputBox.Text.Length < 16)
+            if (ScannerInputBox.Text.Length < 41)
             {
                 UpdateOutputText("Please Scan Barcode.");
                 SelectScannerInputBox("");
@@ -262,19 +265,30 @@ namespace Dongle_Test_Suite_2._1
             {
                 DoEvents("");
                 CandidateMac = ScannerInputBox.Text.ToUpper();  // Candidate mac address is whatever's in the text box (but change it to uppercase for consistency)
-
+/*
                 if (CandidateMac.Length == 16)  // if 16 digits have been entered
                 {
                     if (CandidateMac.StartsWith(Parameters.MACheader))  // and if the first 3 bytes are our MAC header
                     {
                         Mac = CandidateMac;                            // then make the 16 digits our MAC address
                         break;
-                    }
+                    }                    
                     else throw new Exception_Yellow("Error: MAC address entered does not begin with the ThinkEco MAC header (0x80 0x4F 0x58).  Be careful not to type with the keyboard while using the barcode scanner.");
+                }
+*/ 
+                if (CandidateMac.Length == 41)
+                {
+                    if (CandidateMac.StartsWith(Parameters.MACheader))
+                    {
+                        Mac = CandidateMac.Substring(7,16);
+                        break;
+                    }                    
+                    else throw new Exception_Yellow("Error: MAC address entered does not begin with the Liteon MAC header (0x80 0x4F 0x58).  Be careful not to type with the keyboard while using the barcode scanner.");
                 }
                 else
                 {
-                    if (CandidateMac.Length > 16) UpdateOutputText("More than 16 digits have been entered -- this MAC address cannot be correct.  Please erase and re-scan or re-type.");
+                    //if (CandidateMac.Length > 16) UpdateOutputText("More than 16 digits have been entered -- this MAC address cannot be correct.  Please erase and re-scan or re-type.");
+                    if (CandidateMac.Length > 41) UpdateOutputText("More than 41 digits have been entered -- this MAC address cannot be correct.  Please erase and re-scan or re-type.");
                     System.Threading.Thread.Sleep(50);
                 }
             }
