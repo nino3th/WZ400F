@@ -1,4 +1,9 @@
-﻿using System;
+﻿//History
+//===================================================================================================
+// 20120309 |  2.1.2   | Nino Liu   |  add counterid parameter in Trimmer() function 
+//===================================================================================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,7 +56,8 @@ namespace Dongle_Test_Suite_2._1
             parameters = pars;
             thisUSB = USB;
             //Frequency counter must be programmed with the following address information: GPIB ID 0, primary address 9, and no secondary address.
-            FREQ_COUNTER = new Device(0, 9, 0); // create an object to hold the frequency counter, with GPIB ID 0, primary addr 9, and no secondary addr.  the primary addr was manually set on the counter itself.
+            //FREQ_COUNTER = new Device(0, 15, 0); // create an object to hold the frequency counter, with GPIB ID 0, primary addr 9, and no secondary addr.  the primary addr was manually set on the counter itself.
+            FREQ_COUNTER = new Device(0, parameters.counter_id, 0); // create an object to hold the frequency counter, with GPIB ID 0, primary addr 9, and no secondary addr.  the primary addr was manually set on the counter itself.            
         }
         public void Run()
         {
@@ -206,14 +212,16 @@ namespace Dongle_Test_Suite_2._1
                 Utils.WaitForZTCResponse(thisUSB, parameters);
             //System.Threading.Thread.Sleep(as long as settling takes);
 
-            FREQ_COUNTER.Write(":meas:freq? 12,0.0000001");
+            //FREQ_COUNTER.Write(":meas:freq? 12,0.0000001");
+                FREQ_COUNTER.Write(":MEASURE:FREQ? 12,0.0000001");
             //System.Threading.Thread.Sleep(2000);
             freq = Convert.ToDouble(FREQ_COUNTER.ReadString());
             return freq;
         }
         public void TakeSingleMeasurement()
         {
-            FREQ_COUNTER.Write(":meas:freq? 12,0.0000001");
+            //FREQ_COUNTER.Write(":meas:freq? 12,0.0000001");
+            FREQ_COUNTER.Write(":MEASURE:FREQ? 12,0.0000001");
             //System.Threading.Thread.Sleep(2000);
             parameters.frequency_measured = Convert.ToDouble(FREQ_COUNTER.ReadString());
         }
@@ -223,10 +231,11 @@ namespace Dongle_Test_Suite_2._1
             if (s.Length < 2) s = "0" + s;
             return s;
         }
-        public static void testtrimmerisattached()
+        public static void testtrimmerisattached(byte counterid) //add by nino @20120309
         {
-            Device d = new Device(0, 9, 0);
-            d.Write(":meas:freq? 12,0.0000001");
+            Device d = new Device(0, counterid, 0);
+            //d.Write(":meas:freq? 12,0.0000001");
+            d.Write(":MEASURE:FREQ? 12,0.0000001");
         }
     }
 }

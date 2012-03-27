@@ -1,4 +1,11 @@
-﻿using System;
+﻿//History
+//===================================================================================================
+// 20120307 |  2.1.1   | Nino Liu   |  Cancel comment out of thisUSB.ChipReset() and remove gui top's vn.
+//---------------------------------------------------------------------------------------------------
+// 20120308 |  2.1.2   | Nino Liu   |  Add counter id information by scaning textbox.
+//===================================================================================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,6 +61,7 @@ namespace Dongle_Test_Suite_2._1
         public int finetrim_SET;
         public double frequency_measured;
         public string PINstring = "_";
+        public byte counter_id;//add 20120322 by Nino
 
         //to be in settings file (default values, if any, set here)
         public bool testing;
@@ -177,6 +185,7 @@ namespace Dongle_Test_Suite_2._1
         //settings file strings
         public const string SettingsString_testingbool = "Testing?";
         public const string SettingsString_loadingbool = "Loading?";
+        public const string SettingString_Frequency_counter_address = "Frequency Counter Address:"; //add 20120322 by Nino
         public const string SettingsString_USBUnderTestPID = "PID expected for USB under test (if unspecified, defaults to 04036001):";
         public const string SettingsString_RefRadioPID = "PID expected for reference radio dongle (if unspecified, defaults to 04036006):";
         public const string SettingsString_finalPID = "PID set on completion (if unspecified, defaults to 04038C80):";
@@ -222,6 +231,10 @@ namespace Dongle_Test_Suite_2._1
                             else if (S == "false") loading = false;
                             else throw new Exception_Yellow("The \"" + Parameters.SettingsString_loadingbool + "\" line in settings file must say either true or false, no spaces.");
                         }
+                        break;
+                    case Parameters.SettingString_Frequency_counter_address: //Read Counter id from Setting file added 20120322 by Nino
+                        S = SR.ReadLine();
+                        if (S != "" && !S.StartsWith("//")) counter_id = Convert.ToByte(S); 
                         break;
                     case Parameters.SettingsString_USBUnderTestPID:
                         S = SR.ReadLine();

@@ -1,6 +1,8 @@
 ﻿//History
 //==========================================================================================================
 // 20120307 |  2.1.1   | Nino Liu   |  Cancel comment out of thisUSB.ChipReset() and remove gui top's vn.
+//---------------------------------------------------------------------------------------------------
+// 20120309 |  2.1.2   | Nino Liu   |  Add counter id information by scaning textbox.
 //==========================================================================================================
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,8 @@ namespace Dongle_Test_Suite_2._1
         FTDIdevice referenceRadio;
         Exception yellow = new Exception();
         Exception red = new Exception();
+        byte counterid;
+
         public MainForm()
         {
             
@@ -94,6 +98,7 @@ namespace Dongle_Test_Suite_2._1
             try
             {
                 Setup();
+                ReadCounterID();
                 CheckRequirements();                                //check that necessary stuff is plugged in
                 ReadBarcode(); //come back to this                  //read scanned barcode (MAC address) from text box
                     UpdateOutputText("Opening USB port...");
@@ -202,7 +207,7 @@ namespace Dongle_Test_Suite_2._1
             {
                 try
                 {
-                    Trimmer.testtrimmerisattached();
+                    Trimmer.testtrimmerisattached(parameters.counter_id);//add by nino
                 }
                 catch (Exception exc)
                 {
@@ -225,6 +230,20 @@ namespace Dongle_Test_Suite_2._1
                     refradioattached = false;
                 }
             }
+        }
+        public void ReadCounterID()
+        {
+//            if (CounterID.Text.Length != null && CounterID.Text.Length <= 2 )
+            if(parameters.counter_id != null )
+            {
+                UpdateOutputText("Set counter ID.");
+                System.Threading.Thread.Sleep(50);
+            }
+            else
+            {
+                throw new Exception_Red("error: Please enter correct Counter ID !! ");
+            }
+            //counterid = Convert.ToByte(CounterID.Text.ToUpper());
         }
         public void ReadBarcode()
         {
