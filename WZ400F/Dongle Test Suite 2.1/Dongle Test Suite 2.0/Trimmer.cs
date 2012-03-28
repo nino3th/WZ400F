@@ -1,6 +1,8 @@
 ﻿//History
 //===================================================================================================
 // 20120309 |  2.1.2   | Nino Liu   |  add counterid parameter in Trimmer() function 
+//---------------------------------------------------------------------------------------------------
+// 20120328 |  2.1.7   | Nino Liu   |  Add function to get frequency counter data and write in log
 //===================================================================================================
 
 using System;
@@ -67,6 +69,11 @@ namespace Dongle_Test_Suite_2._1
             parameters.finetrim_SET = FinalFine; 
             parameters.frequency_measured = FinalFreq;
             parameters.TrimSequence = TrimSequence;
+        }
+        public void Feedback_freq()//add by nino
+        {        
+            FREQ_COUNTER.Write("READ? ");
+            parameters.frequency_measured = Convert.ToDouble(FREQ_COUNTER.ReadString());
         }
         public void NewTrimmer(FTDIdevice thisUSB, int coarse, double finetrim, double backupfinetrim)//    newtrimmer(initialcoarse, initialtrim1, initialtrim2)
         {

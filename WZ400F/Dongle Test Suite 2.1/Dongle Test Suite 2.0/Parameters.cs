@@ -34,8 +34,6 @@ namespace Dongle_Test_Suite_2._1
         public const string errorlogfilepath = mainfilepath + "\\res\\errorlog.txt";
         public const string nextSNfilepath = mainfilepath + "\\res\\nextSN.txt";
 
-        //public const string MACheader = "804F58";
-        //public const string MACheader = "TM1001 9CB70D";
         public const string MACheader = "TM1001 3";
 
         public const uint HwInfAdr = 0x18000;

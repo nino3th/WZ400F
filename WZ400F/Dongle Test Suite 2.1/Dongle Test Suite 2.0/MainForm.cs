@@ -11,6 +11,8 @@
 // 20120323 |  2.1.5   | Nino Liu   |  Modified MAC Header for 2 kinds facctory test mode veriosn 
 //---------------------------------------------------------------------------------------------------
 // 20120328 |  2.1.6   | Nino Liu   |  Modified variable that be able to better understand.  
+//---------------------------------------------------------------------------------------------------
+// 20120328 |  2.1.7   | Nino Liu   |  Add function to get frequency counter data and write in log
 //==========================================================================================================
 using System;
 using System.Collections.Generic;
@@ -334,13 +336,14 @@ namespace Dongle_Test_Suite_2._1
             thisUSB.adjustBaudRate(Parameters.BaudRate_UARTandTesting);  //return to baud rate that the ZTC is written for for testing.  consider speeding ZTC up later and testing to see if it affects quality/speed.
         }
         private void SetCrystalTrim()
-        {
+        {            
+            Trimmer trimmer = new Trimmer(parameters, thisUSB);//init frequency counter @20120328 by nino
             //pick our trim values, either by calculating them based on repeated frequency measurements and newton's method, or by looking them up in a database, or by choosing the default ones that are in the settings file.
             if (parameters.crystaltrimming)
             {
                 System.Threading.Thread.Sleep(50);  //added in because first ZTC packet in trimming wasn't getting a response, prob bc ZTC was still booting
                 UpdateOutputText("Calculating optimal crystal trim values...");
-                Trimmer trimmer = new Trimmer(parameters, thisUSB);
+                //Trimmer trimmer = new Trimmer(parameters, thisUSB);
                 trimmer.Run();                      //Communicates with the frequency counter via GPIB connection to take frequency measurements and adjust the trim values until frequency is close to 12 MHz.
             }
             else if (parameters.lookinguptrimsbool)
@@ -348,13 +351,14 @@ namespace Dongle_Test_Suite_2._1
                 LookupTrimValues();
             }
             else if (parameters.settingdefaulttrimsbool)
-            {
+            {                
                 SetDefaultTrimValues();
+                trimmer.Feedback_freq();//to get frequency counter data @20120328 by nino
             }
             //if set to measure the freqency once (presumably after setting looked-up or default trims), do so.
             if (parameters.checkingfreqafternottrimmingbool)
             {
-                Trimmer trimmer = new Trimmer(parameters, thisUSB);
+                //Trimmer trimmer = new Trimmer(parameters, thisUSB);
                 trimmer.TakeSingleMeasurement();
             }
             UpdateProgressBar_Overall(47);
