@@ -8,7 +8,9 @@
 //---------------------------------------------------------------------------------------------------
 // 20120323 |  2.1.4   | Nino Liu   |  Modified MAC address rule and writed mac information into FT232R
 //---------------------------------------------------------------------------------------------------
-// 20120323 |  2.1.5   | Nino Liu   |  Modified MAC Header for 2 facctory test mode veriosn 
+// 20120323 |  2.1.5   | Nino Liu   |  Modified MAC Header for 2 kinds facctory test mode veriosn 
+//---------------------------------------------------------------------------------------------------
+// 20120328 |  2.1.6   | Nino Liu   |  Modified variable that be able to better understand.  
 //==========================================================================================================
 using System;
 using System.Collections.Generic;
@@ -32,8 +34,7 @@ namespace Dongle_Test_Suite_2._1
         FTDIdevice thisUSB;
         FTDIdevice referenceRadio;
         Exception yellow = new Exception();
-        Exception red = new Exception();
-        byte counterid;
+        Exception red = new Exception();      
 
         public MainForm()
         {
@@ -265,31 +266,21 @@ namespace Dongle_Test_Suite_2._1
 
             string Mac = null;
             string sn = null;
-            string temp_sn = null;
+            string temp_mac = null;
             string CandidateMac = null;
             int x = 1200;
             while (x-- > 0)
             {
                 DoEvents("");
                 CandidateMac = ScannerInputBox.Text.ToUpper();  // Candidate mac address is whatever's in the text box (but change it to uppercase for consistency)
-/*
-                if (CandidateMac.Length == 16)  // if 16 digits have been entered
-                {
-                    if (CandidateMac.StartsWith(Parameters.MACheader))  // and if the first 3 bytes are our MAC header
-                    {
-                        Mac = CandidateMac;                            // then make the 16 digits our MAC address
-                        break;
-                    }                    
-                    else throw new Exception_Yellow("Error: MAC address entered does not begin with the ThinkEco MAC header (0x80 0x4F 0x58).  Be careful not to type with the keyboard while using the barcode scanner.");
-                }
-*/ 
+
                 if (CandidateMac.Length == 41)
                 {
                     if (CandidateMac.StartsWith(Parameters.MACheader))
                     {
                         sn = CandidateMac.Substring(7, 8);
                         Mac = CandidateMac.Substring(16,16);
-                        temp_sn = CandidateMac.Substring(28,4);
+                        temp_mac = CandidateMac.Substring(28,4);
                         break;
                     }                    
                     else throw new Exception_Yellow("Error: MAC address entered does not begin with the Liteon MAC header (0x80 0x4F 0x58).  Be careful not to type with the keyboard while using the barcode scanner.");
@@ -304,7 +295,7 @@ namespace Dongle_Test_Suite_2._1
             if (x <= 0) throw new Exception_Yellow("Timed out after waiting 1 minute for barcode to scan.  Try again.");
             parameters.MAC = Mac;
             parameters.SN = sn;
-            parameters.Temp_mac = temp_sn;
+            parameters.Temp_mac = temp_mac;//for simple OQC test 
             UpdateOutputText("Barcode accepted.");
             UpdateProgressBar_Overall(5);
         }

@@ -7,10 +7,10 @@ Format of this file: name of parameter, followed by the value of the parameter o
 
 
 Testing?
-false
+true
 
 Loading?
-true
+false
 
 Firmware image filename:
 Dongle_HW3_SW2.bin

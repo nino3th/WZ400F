@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------------------------------------
 // 20120323 |  2.1.4   | Nino Liu   |  Modified MAC address rule and writed mac information into FT232R
 //---------------------------------------------------------------------------------------------------
-// 20120323 |  2.1.5   | Nino Liu   |  Modified MAC Header for 2 facctory test mode veriosn 
+// 20120323 |  2.1.5   | Nino Liu   |  Modified MAC Header for 2 kinds facctory test mode veriosn 
 //===================================================================================================
 
 using System;
