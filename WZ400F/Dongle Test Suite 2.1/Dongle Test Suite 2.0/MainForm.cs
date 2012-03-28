@@ -13,6 +13,8 @@
 // 20120328 |  2.1.6   | Nino Liu   |  Modified variable that be able to better understand.  
 //---------------------------------------------------------------------------------------------------
 // 20120328 |  2.1.7   | Nino Liu   |  Add function to get frequency counter data and write in log
+//---------------------------------------------------------------------------------------------------
+// 20120328 |  2.1.8   | Nino Liu   |  Add Serial number information on test panel after test ok.
 //==========================================================================================================
 using System;
 using System.Collections.Generic;
@@ -133,9 +135,14 @@ namespace Dongle_Test_Suite_2._1
                 UpdateProgressBar_Overall(progressBar_overall.Maximum);
                 SaveSerialNumber();
                 UpdateColorDisplay("green");
-                if(parameters.testing && parameters.loading) UpdateOutputText("Test and load with MAC address " + parameters.MAC + " have completed successfully in "+ parameters.totaltesttime + " seconds.");
-                else if (parameters.loading) UpdateOutputText("Loading  with MAC address " + parameters.MAC + " has completed successfully in " + parameters.totaltesttime + " seconds.");
-                else UpdateOutputText("Testing  with MAC address " + parameters.MAC + " has completed successfully in " + parameters.totaltesttime + " seconds.");
+                //add serial number @20120328 by nino
+                if (parameters.testing && parameters.loading) UpdateOutputText("Test and load with MAC: " + parameters.MAC + '\n' + "Serial number: " + parameters.SN + '\n' +
+                         "Spent time: " + parameters.totaltesttime + " seconds.");
+                else if (parameters.loading) UpdateOutputText("Loading  with MAC: " + parameters.MAC + '\n' + "Serial number: " + parameters.SN + '\n' +
+                        "Spent time: " + parameters.totaltesttime + " seconds.");
+                else
+                    UpdateOutputText("Testing with MAC: " + parameters.MAC + '\n' + "Serial number: " + parameters.SN + '\n' + 
+                        "Spent time: " + parameters.totaltesttime + " seconds.");
             }
             catch (Exception_Yellow e)
             {
