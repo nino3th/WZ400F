@@ -7,6 +7,8 @@
 // 20120309 |  2.1.3   | Nino Liu   |  Modified MAC header ID become Liteon uniquely and Setting file path.
 //---------------------------------------------------------------------------------------------------
 // 20120323 |  2.1.4   | Nino Liu   |  Modified MAC address rule and writed mac information into FT232R
+//---------------------------------------------------------------------------------------------------
+// 20120323 |  2.1.5   | Nino Liu   |  Modified MAC Header for 2 facctory test mode veriosn 
 //===================================================================================================
 
 using System;
@@ -34,7 +36,7 @@ namespace Dongle_Test_Suite_2._1
 
         //public const string MACheader = "804F58";
         //public const string MACheader = "TM1001 9CB70D";
-        public const string MACheader = "TE1001 3";
+        public const string MACheader = "TM1001 3";
 
         public const uint HwInfAdr = 0x18000;
 

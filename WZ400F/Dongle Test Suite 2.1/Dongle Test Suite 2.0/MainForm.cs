@@ -7,6 +7,8 @@
 // 20120309 |  2.1.3   | Nino Liu   |  Modified MAC header ID become Liteon uniquely and Setting file path.
 //---------------------------------------------------------------------------------------------------
 // 20120323 |  2.1.4   | Nino Liu   |  Modified MAC address rule and writed mac information into FT232R
+//---------------------------------------------------------------------------------------------------
+// 20120323 |  2.1.5   | Nino Liu   |  Modified MAC Header for 2 facctory test mode veriosn 
 //==========================================================================================================
 using System;
 using System.Collections.Generic;
@@ -105,10 +107,8 @@ namespace Dongle_Test_Suite_2._1
                 ReadCounterID();
                 CheckRequirements();                                //check that necessary stuff is plugged in
                 ReadBarcode(); //come back to this                  //read scanned barcode (MAC address) from text box
-
                 parameters.SetSerialNumber(); 
-
-                    UpdateOutputText("Opening USB port...");
+                UpdateOutputText("Opening USB port...");
                 thisUSB.OpenPort(parameters.USB_under_test_pid, 6000);    //open up the usb port
 
                 EraseDongleHW3SW2firmware();
@@ -327,13 +327,9 @@ namespace Dongle_Test_Suite_2._1
 
             LoadTestingFirmware();
             //TrimCrystal();
-
             RadioTest();
-
             //Utils.SendZTCCommand(thisUSB, "95 0A 02 " + Trimmer.TrimPacketPrep(4) + Trimmer.TrimPacketPrep(4));
             //Utils.SendZTCCommand(thisUSB, "95 0A 02 " + Trimmer.TrimPacketPrep(24) + Trimmer.TrimPacketPrep(11));
-
-            //RadioTest();
         }
         private void LoadTestingFirmware()
         {
