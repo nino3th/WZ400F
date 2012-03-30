@@ -19,6 +19,8 @@
 // 20120330 |  2.1.9   | Nino Liu   |  Modified MAC check rule
 //---------------------------------------------------------------------------------------------------
 // 20120330 |  2.1.10  | Nino Liu   |  Debug trimdata file path
+//---------------------------------------------------------------------------------------------------
+// 20120330 |  2.1.11  | Nino Liu   |  Debug MAC digit string
 //==========================================================================================================
 using System;
 using System.Collections.Generic;
@@ -268,9 +270,6 @@ namespace Dongle_Test_Suite_2._1
         }
         public void ReadBarcode()
         {
-            //parameters.MAC = "804F580000000000";
-
-            //if (ScannerInputBox.Text.Length < 16)
             if (ScannerInputBox.Text.Length < 41)
             {
                 UpdateOutputText("Please Scan Barcode.");
@@ -291,17 +290,16 @@ namespace Dongle_Test_Suite_2._1
                 {                    
                     sn = CandidateMac.Substring(7, 8);                   
                     Mac = CandidateMac.Substring(16,16);
-                                            
+                    //temp_mac = CandidateMac.Substring(28, 4);//Store mac end code for simple oqc test                        
                     if (Mac.StartsWith(Parameters.MACheader))                        
-                    {                            
-                        temp_mac = CandidateMac.Substring(28, 4);//Store mac end code for simple oqc test                     
+                    {   
+                        temp_mac = Mac.Substring(12,4);
                         break;                        
                     }                        
                     else throw new Exception_Yellow("Error: MAC address entered does not begin with the Liteon MAC header (0x80 0x4F 0x58).  Be careful not to type with the keyboard while using the barcode scanner.");
                 }
                 else
-                {
-                    //if (CandidateMac.Length > 16) UpdateOutputText("More than 16 digits have been entered -- this MAC address cannot be correct.  Please erase and re-scan or re-type.");
+                {                    
                     if (CandidateMac.Length > 41) UpdateOutputText("More than 41 digits have been entered -- this MAC address cannot be correct.  Please erase and re-scan or re-type.");
                     System.Threading.Thread.Sleep(50);
                 }
