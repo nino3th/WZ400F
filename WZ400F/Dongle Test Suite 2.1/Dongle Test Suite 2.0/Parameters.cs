@@ -11,6 +11,8 @@
 // 20120323 |  2.1.5   | Nino Liu   |  Modified MAC Header for 2 kinds facctory test mode veriosn 
 //---------------------------------------------------------------------------------------------------
 // 20120330 |  2.1.9   | Nino Liu   |  Modified MAC check rule
+//---------------------------------------------------------------------------------------------------
+// 20120330 |  2.1.10  | Nino Liu   |  Debug trimdata file path
 //===================================================================================================
 
 using System;
@@ -354,7 +356,7 @@ namespace Dongle_Test_Suite_2._1
             ZTCfilepath = Parameters.testingfilepath + "\\" + ZTCfilename;
             SSLfilepath = Parameters.loadingfilepath + "\\" + SSLfilename;
             FWimagefilepath = Parameters.loadingfilepath + "\\" + FWimagefilename;
-            trimsdatabasefilepath = Parameters.mainfilepath + "\\" + trimsdatabasefilename;
+            trimsdatabasefilepath = Parameters.mainfilepath + "\\res\\" + trimsdatabasefilename;
             if (testing && !loading) FWimagefilename = "_";  //if testing only, doesn't make sense to record name of image loaded
 
             if (!testing) numberofradiotestsEachWay = 0;
