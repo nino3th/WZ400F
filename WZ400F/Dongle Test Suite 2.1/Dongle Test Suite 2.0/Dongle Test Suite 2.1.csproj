@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dongle_Test_Suite_2._1</RootNamespace>
-    <AssemblyName>Dongle Test Suite 2.1.8</AssemblyName>
+    <AssemblyName>Dongle Test Suite 2.1.9</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>

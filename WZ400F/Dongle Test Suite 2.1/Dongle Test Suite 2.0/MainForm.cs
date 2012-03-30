@@ -15,6 +15,8 @@
 // 20120328 |  2.1.7   | Nino Liu   |  Add function to get frequency counter data and write in log
 //---------------------------------------------------------------------------------------------------
 // 20120328 |  2.1.8   | Nino Liu   |  Add Serial number information on test panel after test ok.
+//---------------------------------------------------------------------------------------------------
+// 20120330 |  2.1.9   | Nino Liu   |  Modified MAC check rule
 //==========================================================================================================
 using System;
 using System.Collections.Generic;
@@ -142,7 +144,7 @@ namespace Dongle_Test_Suite_2._1
                         "Spent time: " + parameters.totaltesttime + " seconds.");
                 else
                     UpdateOutputText("Testing with MAC: " + parameters.MAC + '\n' + "Serial number: " + parameters.SN + '\n' + 
-                        "Spent time: " + parameters.totaltesttime + " seconds.");
+                        "Spent time: " + parameters.totaltesttime + " seconds.");                
             }
             catch (Exception_Yellow e)
             {
@@ -284,14 +286,15 @@ namespace Dongle_Test_Suite_2._1
                 CandidateMac = ScannerInputBox.Text.ToUpper();  // Candidate mac address is whatever's in the text box (but change it to uppercase for consistency)
 
                 if (CandidateMac.Length == 41)
-                {
-                    if (CandidateMac.StartsWith(Parameters.MACheader))
-                    {
-                        sn = CandidateMac.Substring(7, 8);
-                        Mac = CandidateMac.Substring(16,16);
-                        temp_mac = CandidateMac.Substring(28,4);
-                        break;
-                    }                    
+                {                    
+                    sn = CandidateMac.Substring(7, 8);                   
+                    Mac = CandidateMac.Substring(16,16);
+                                            
+                    if (Mac.StartsWith(Parameters.MACheader))                        
+                    {                            
+                        temp_mac = CandidateMac.Substring(28, 4);//Store mac end code for simple oqc test                     
+                        break;                        
+                    }                        
                     else throw new Exception_Yellow("Error: MAC address entered does not begin with the Liteon MAC header (0x80 0x4F 0x58).  Be careful not to type with the keyboard while using the barcode scanner.");
                 }
                 else

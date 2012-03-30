@@ -9,6 +9,8 @@
 // 20120323 |  2.1.4   | Nino Liu   |  Modified MAC address rule and writed mac information into FT232R
 //---------------------------------------------------------------------------------------------------
 // 20120323 |  2.1.5   | Nino Liu   |  Modified MAC Header for 2 kinds facctory test mode veriosn 
+//---------------------------------------------------------------------------------------------------
+// 20120330 |  2.1.9   | Nino Liu   |  Modified MAC check rule
 //===================================================================================================
 
 using System;
@@ -33,8 +35,8 @@ namespace Dongle_Test_Suite_2._1
         public const string backuplogfilepath = mainfilepath + "\\res\\backuplog.txt";
         public const string errorlogfilepath = mainfilepath + "\\res\\errorlog.txt";
         public const string nextSNfilepath = mainfilepath + "\\res\\nextSN.txt";
-
-        public const string MACheader = "TM1001 3";
+        
+        public const string MACheader = "804F58";
 
         public const uint HwInfAdr = 0x18000;
 
