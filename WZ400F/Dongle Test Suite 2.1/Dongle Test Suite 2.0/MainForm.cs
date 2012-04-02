@@ -21,7 +21,10 @@
 // 20120330 |  2.1.10  | Nino Liu   |  Debug trimdata file path
 //---------------------------------------------------------------------------------------------------
 // 20120330 |  2.1.11  | Nino Liu   |  Debug MAC digit string
+//---------------------------------------------------------------------------------------------------
+// 20120402 |  2.1.12  | Nino Liu   |  Show Pass picture if successful
 //==========================================================================================================
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -141,6 +144,7 @@ namespace Dongle_Test_Suite_2._1
                 UpdateProgressBar_Overall(progressBar_overall.Maximum);
                 SaveSerialNumber();
                 UpdateColorDisplay("green");
+                UpdatePictureDisplay("pass");
                 //add serial number @20120328 by nino
                 if (parameters.testing && parameters.loading) UpdateOutputText("Test and load with MAC: " + parameters.MAC + '\n' + "Serial number: " + parameters.SN + '\n' +
                          "Spent time: " + parameters.totaltesttime + " seconds.");
@@ -687,6 +691,16 @@ namespace Dongle_Test_Suite_2._1
             else if (color == "orange") StatusIndicator.BackColor = System.Drawing.Color.Orange;
             else StatusIndicator.BackColor = System.Drawing.Color.MediumOrchid;
             System.Windows.Forms.Application.DoEvents();
+        }
+        public void UpdatePictureDisplay(string value)
+        {
+            if (InvokeRequired)
+            {
+                // We're not in the UI thread, so we need to call BeginInvoke
+                BeginInvoke(new StringParameterDelegate(UpdatePictureDisplay), new object[] { value });
+                return;
+            }
+            if (value == "pass") pictureBox1.Image = new Bitmap("Pass.jpg");
         }
         public void UpdateProgressBar_Detail(int progress)
         {
