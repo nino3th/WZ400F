@@ -13,6 +13,8 @@
 // 20120330 |  2.1.9   | Nino Liu   |  Modified MAC check rule
 //---------------------------------------------------------------------------------------------------
 // 20120330 |  2.1.10  | Nino Liu   |  Debug trimdata file path
+//---------------------------------------------------------------------------------------------------
+// 20120405 |  2.1.14  | Nino Liu   |  Debug to Force convert Serial number from 16 type to 10 type.
 //===================================================================================================
 
 using System;
@@ -159,8 +161,7 @@ namespace Dongle_Test_Suite_2._1
         }
         public void SetSerialNumber()
         {
-            SerialNumber = NextSerialNumber();
-            //SerialNumber = Convert.ToUInt32(SN);            
+            SerialNumber = NextSerialNumber();                     
             SerialNumberbytes[0] = Convert.ToByte((SerialNumber & 0xFF000000) >> 24);  //split 64-bit address into 4 bytes, little-Endian
             SerialNumberbytes[1] = Convert.ToByte((SerialNumber & 0x00FF0000) >> 16);
             SerialNumberbytes[2] = Convert.ToByte((SerialNumber & 0x0000FF00) >> 8);
@@ -169,32 +170,11 @@ namespace Dongle_Test_Suite_2._1
         }
         public uint NextSerialNumber()
         {
-/*            StreamReader SR;
             uint nextSN;
-            try
-            {
-                SR = File.OpenText(Parameters.nextSNfilepath);                
-            }
-            catch (System.ArgumentOutOfRangeException)
-            {
-                throw new Exception_Yellow("No nextSN serial number file found.  Contact ThinkEco to troubleshoot.");
-            }
-            try
-            {
-                nextSN = Convert.ToUInt32(SR.ReadLine());
-                //nextSN = Convert.ToUInt32(SN);
-            }
-            catch (System.ArgumentOutOfRangeException)
-            {
-                throw new Exception_Yellow("No valid serial number found in nextSN file; cannot assign a unique USB serial number.  Contact ThinkEco to troubleshoot.");
-            }
-            SR.Close();
-*/            
-            uint nextSN;
-            nextSN = Convert.ToUInt32(SN);
-            if (nextSN > 0xFFFFFFF) throw new Exception_Yellow("Serial number in nextSN storage file is too large to continue.  You've made a lot of products!  Contact ThinkEco for assistance.");
+            nextSN = Convert.ToUInt32(SN,16);
+            if (nextSN > 0xFFFFFFFF) throw new Exception_Yellow("Serial number in nextSN storage file is too large to continue.  You've made a lot of products!  Contact ThinkEco for assistance.");
             serialnumberlower3bytes = nextSN;
-            nextSN += serialnumberprefix << 28;
+            nextSN += serialnumberprefix << 32;
             return nextSN;
         }
 
