@@ -13,7 +13,7 @@ Loading?
 false
 
 Firmware image filename:
-Dongle_HW3_SW2.bin
+Dongle_1.0.0_28-02-2012.bin
 
 Frequency Counter Address:
 15
@@ -47,7 +47,7 @@ Listen loop timeout (number of times to loop through 20-ms listen before timing 
 
 TRIMMING SETTINGS:
 Trimming crystal? (defaults to false, ignored if testing = false) (this line must be first of the trimming settings)
-false
+true
 
 If not trimming crystal (ignored if trimming set to true):
 -Setting default trim values?

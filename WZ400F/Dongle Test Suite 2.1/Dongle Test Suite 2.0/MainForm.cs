@@ -23,6 +23,8 @@
 // 20120330 |  2.1.11  | Nino Liu   |  Debug MAC digit string
 //---------------------------------------------------------------------------------------------------
 // 20120402 |  2.1.12  | Nino Liu   |  Show Pass picture if successful
+//---------------------------------------------------------------------------------------------------
+// 20120402 |  2.1.13  | Nino Liu   |  Add frequency on the top panel after test ok and show fail pic if failed
 //==========================================================================================================
 
 using System;
@@ -144,22 +146,22 @@ namespace Dongle_Test_Suite_2._1
                 UpdateProgressBar_Overall(progressBar_overall.Maximum);
                 SaveSerialNumber();
                 UpdateColorDisplay("green");
-                UpdatePictureDisplay("pass");
+                UpdatePictureDisplay("pass");//add pic @20120402 by Nino Liu
                 //add serial number @20120328 by nino
                 if (parameters.testing && parameters.loading) UpdateOutputText("Test and load with MAC: " + parameters.MAC + '\n' + "Serial number: " + parameters.SN + '\n' +
-                         "Spent time: " + parameters.totaltesttime + " seconds.");
+                         "Spent time: " + parameters.totaltesttime + " seconds."+ '\n' + "Optimal Frequency: " + parameters.frequency_measured);
                 else if (parameters.loading) UpdateOutputText("Loading  with MAC: " + parameters.MAC + '\n' + "Serial number: " + parameters.SN + '\n' +
-                        "Spent time: " + parameters.totaltesttime + " seconds.");
+                        "Spent time: " + parameters.totaltesttime + " seconds." + '\n' + "Optimal Frequency: " + parameters.frequency_measured);
                 else
                     UpdateOutputText("Testing with MAC: " + parameters.MAC + '\n' + "Serial number: " + parameters.SN + '\n' + 
-                        "Spent time: " + parameters.totaltesttime + " seconds.");                
+                        "Spent time: " + parameters.totaltesttime + " seconds." + '\n' + "Optimal Frequency: " + parameters.frequency_measured);
             }
             catch (Exception_Yellow e)
-            {
+            {                
                 ExceptionHandler(e, "yellow");
             }
             catch (Exception_Red e)
-            {
+            {                
                 ExceptionHandler(e, "red");
             }
             catch (Exception e)
@@ -198,6 +200,7 @@ namespace Dongle_Test_Suite_2._1
             }
             UpdateOutputText(ex.Message);
             UpdateColorDisplay(category);
+            UpdatePictureDisplay("fail");
             if (category == "yellow")
                 AppendToOutputText("\n\nPlease unplug and re-plug USB and try test again.");
             else if (category == "red")
@@ -692,7 +695,7 @@ namespace Dongle_Test_Suite_2._1
             else StatusIndicator.BackColor = System.Drawing.Color.MediumOrchid;
             System.Windows.Forms.Application.DoEvents();
         }
-        public void UpdatePictureDisplay(string value)
+        public void UpdatePictureDisplay(string value) //add @20120402 by Nino Liu
         {
             if (InvokeRequired)
             {
@@ -701,6 +704,7 @@ namespace Dongle_Test_Suite_2._1
                 return;
             }
             if (value == "pass") pictureBox1.Image = new Bitmap("Pass.jpg");
+            else if (value == "fail") pictureBox2.Image = new Bitmap("Fail.jpg");
         }
         public void UpdateProgressBar_Detail(int progress)
         {

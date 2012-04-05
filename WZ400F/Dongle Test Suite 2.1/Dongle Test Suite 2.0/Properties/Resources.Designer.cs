@@ -59,12 +59,5 @@ namespace Dongle_Test_Suite_2._1.Properties {
                 resourceCulture = value;
             }
         }
-        
-        internal static System.Drawing.Bitmap Pass {
-            get {
-                object obj = ResourceManager.GetObject("Pass", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

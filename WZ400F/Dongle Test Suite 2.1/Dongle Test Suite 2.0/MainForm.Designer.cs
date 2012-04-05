@@ -37,11 +37,13 @@ namespace Dongle_Test_Suite_2._1
             this.StatusIndicator = new System.Windows.Forms.Panel();
             this.ScannerInputBox = new System.Windows.Forms.TextBox();
             this.Output = new System.Windows.Forms.Label();
-            this.progressBar_detail = new Dongle_Test_Suite_2._1.ContinuousProgressBar();
-            this.progressBar_overall = new Dongle_Test_Suite_2._1.ContinuousProgressBar();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.progressBar_overall = new Dongle_Test_Suite_2._1.ContinuousProgressBar();
+            this.progressBar_detail = new Dongle_Test_Suite_2._1.ContinuousProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // RunButton
@@ -79,13 +81,27 @@ namespace Dongle_Test_Suite_2._1
             this.Output.Size = new System.Drawing.Size(212, 104);
             this.Output.TabIndex = 3;
             // 
-            // progressBar_detail
+            // openFileDialog1
             // 
-            this.progressBar_detail.Location = new System.Drawing.Point(35, 206);
-            this.progressBar_detail.Name = "progressBar_detail";
-            this.progressBar_detail.Size = new System.Drawing.Size(211, 13);
-            this.progressBar_detail.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar_detail.TabIndex = 4;
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(190, 243);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(82, 48);
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(12, 243);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(82, 48);
+            this.pictureBox2.TabIndex = 7;
+            this.pictureBox2.TabStop = false;
             // 
             // progressBar_overall
             // 
@@ -95,18 +111,13 @@ namespace Dongle_Test_Suite_2._1
             this.progressBar_overall.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar_overall.TabIndex = 5;
             // 
-            // openFileDialog1
+            // progressBar_detail
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.InitialImage = global::Dongle_Test_Suite_2._1.Properties.Resources.Pass;
-            this.pictureBox1.Location = new System.Drawing.Point(190, 243);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(82, 48);
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            this.progressBar_detail.Location = new System.Drawing.Point(35, 206);
+            this.progressBar_detail.Name = "progressBar_detail";
+            this.progressBar_detail.Size = new System.Drawing.Size(211, 13);
+            this.progressBar_detail.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar_detail.TabIndex = 4;
             // 
             // MainForm
             // 
@@ -114,6 +125,7 @@ namespace Dongle_Test_Suite_2._1
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 303);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.progressBar_overall);
             this.Controls.Add(this.progressBar_detail);
@@ -125,6 +137,7 @@ namespace Dongle_Test_Suite_2._1
             this.Name = "MainForm";
             this.Text = "ThinkEco USB Test";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,6 +153,7 @@ namespace Dongle_Test_Suite_2._1
         private ContinuousProgressBar progressBar_detail;
         private ContinuousProgressBar progressBar_overall;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 
