@@ -27,6 +27,8 @@
 // 20120402 |  2.1.13  | Nino Liu   |  Add frequency on the top panel after test ok and show fail pic if failed
 //---------------------------------------------------------------------------------------------------
 // 20120405 |  2.1.14  | Nino Liu   |  Debug to Force convert Serial number from 16 type to 10 type.
+//---------------------------------------------------------------------------------------------------
+// 20120405 |  2.1.15  | Nino Liu   |  Debug to hide pass/fail picture when button click
 //==========================================================================================================
 
 using System;
@@ -97,6 +99,9 @@ namespace Dongle_Test_Suite_2._1
             UpdateProgressBar_Overall(0);
             UpdateProgressBar_Detail(0);
 
+            pictureBox1.Visible = false;
+            pictureBox2.Visible = false;
+            
             parameters = new Parameters();
             parameters.ReadSettingsFile();  //must happen after new parameters is built in order for settings to be saved as params
 
@@ -705,8 +710,16 @@ namespace Dongle_Test_Suite_2._1
                 BeginInvoke(new StringParameterDelegate(UpdatePictureDisplay), new object[] { value });
                 return;
             }
-            if (value == "pass") pictureBox1.Image = new Bitmap("Pass.jpg");
-            else if (value == "fail") pictureBox2.Image = new Bitmap("Fail.jpg");
+            if (value == "pass")
+            {
+                pictureBox1.Image = new Bitmap("Pass.jpg");
+                pictureBox1.Visible = true;
+            }
+            else if (value == "fail")
+            {
+                pictureBox2.Image = new Bitmap("Fail.jpg");
+                pictureBox2.Visible = true;
+            }
         }
         public void UpdateProgressBar_Detail(int progress)
         {
